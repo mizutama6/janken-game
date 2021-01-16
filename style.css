@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+img {
+  width: 100px;
+  height: 100px;
+  vertical-align: bottom;
+}
+
+.enemy-hand {
+  margin: 50px auto;
+  width: 150px;
+  height: 150px;
+  border: 2px solid #333;
+  position: relative;
+}
+.enemy-hand img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.my-hand {
+  margin: 0 auto;
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-hand img {
+  margin: 0 5px;
+}
+
+.my-hand img:hover {
+  cursor: pointer;
+  opacity: .7;
+}
