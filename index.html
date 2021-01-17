@@ -1,25 +1,80 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
   <title>じゃんけんゲーム</title>
 </head>
+
 <body>
-  <!-- 敵の手が表示されるエリア -->
-  <div class="enemy-hand">
-    <img src="">
-  </div>
-  
-  <!-- 自分の手 -->
-  <div class="my-hand">
-    <img src="./img/janken_goo.png">
-    <img src="./img/janken_choki.png">
-    <img src="./img/janken_paa.png">
+  <div id="app">
+    <!-- 敵の手が表示されるエリア -->
+    <div class="enemy-hand">
+      <img :src="enemyHand">
+    </div>
+
+    <!-- 自分の手 -->
+    <div class="my-hand">
+      <img src="./img/janken_goo.png" @click="fight('goo');">
+      <img src="./img/janken_choki.png" @click="fight('choki');">
+      <img src="./img/janken_paa.png" @click="fight('paa');">
+    </div>
+
+    <p>{{ result }}</p>
   </div>
 
   <script src="https://unpkg.com/vue@next"></script>
-  <script src="./app.js"></script>
+  <script>
+    const App = {
+      data() {
+        return {
+          result: "",
+          enemyHand: "",
+          enemyHands: [
+            "./img/janken_goo.png",
+            "./img/janken_choki.png",
+            "./img/janken_paa.png",
+          ]
+        }
+      },
+      methods: {
+        fight(myHand) {
+          // 敵の手を決める
+          const index = Math.floor(Math.random() * 3);
+          this.enemyHand = this.enemyHands[index];
+
+          const hands = ["goo", "choki", "paa"],
+          enemyHand = hands[index];
+
+          // 引き分け判定
+          if(myHand === enemyHand) {
+            this.result = "引き分け"
+          }
+
+          // 勝ち判定
+          if(myHand === "goo" && enemyHand === "choki") {
+            this.result = "勝ち！";
+          } else if (myHand === "choki" && enemyHand === "paa") {
+            this.result = "勝ち！";
+          } else if (myHand === "paa" && enemyHand === "goo") {
+            this.result = "勝ち！";
+          }
+
+          // 負け判定
+          if(myHand === "choki" && enemyHand === "goo") {
+            this.result = "負け…";
+          } else if (myHand === "paa" && enemyHand === "choki") {
+            this.result = "負け…";
+          } else if (myHand === "goo" && enemyHand === "paa") {
+            this.result = "負け…";
+          }
+        }
+      }
+    }
+    Vue.createApp(App).mount("#app");
+  </script>
 </body>
+
 </html>
