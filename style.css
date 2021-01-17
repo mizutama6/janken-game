@@ -35,3 +35,8 @@ img {
   cursor: pointer;
   opacity: .7;
 }
+
+p {
+  font: bold 30px sans-serif;
+  text-align: center;
+}
